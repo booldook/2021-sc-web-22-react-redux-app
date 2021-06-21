@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actUserLogin, actUserLogout } from './store/actions/user-action'
 import { actCommentsAdd, actCommentsRemove } from './store/actions/comments-action'
@@ -10,6 +10,8 @@ function App() {
 	const dispatch = useDispatch()
 	const user = useSelector(state => state.user)
 	const comments = useSelector(state => state.comments)
+	
+	const inputRef = useRef(null)
 
 	const onLogin = useCallback((e) => {
 		dispatch(actUserLogin({
@@ -20,6 +22,15 @@ function App() {
 
 	const onLogout = useCallback((e) => {
 		dispatch(actUserLogout())
+	}, [])
+
+	const onSubmit = useCallback((e) => {
+		e.preventDefault()
+		
+		dispatch(actCommentsAdd({
+			uid: user.id,
+			comment: inputRef.value
+		}))
 	}, [])
 
 	return (
@@ -38,6 +49,12 @@ function App() {
 							: <button className="btn btn-primary" onClick={ onLogin }>로그인</button>
 					}
 				</div>
+				<form onSubmit={ onSubmit }>
+					<div className="form-inline my-3">
+						<input ref={inputRef} className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus />
+						<button className="btn btn-primary ml-1">등록</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	)
