@@ -15,7 +15,7 @@ function App() {
 
 	const onLogin = useCallback((e) => {
 		dispatch(actUserLogin({
-			id: 1,
+			id: '1',
 			name: '춘향이'
 		}))
 	}, [])
@@ -28,7 +28,7 @@ function App() {
 		e.preventDefault()
 		
 		dispatch(actCommentsAdd({
-			uid: user.id,
+			uid: user && user.info ? user.info.id : 0,
 			comment: inputRef.value
 		}))
 	}, [])
@@ -40,11 +40,11 @@ function App() {
 			</div>
 			<div className="user-wrapper">
 				<div className="user-info">
-					{ user ? user.name + '님이 로그인 하였습니다.' : '로그인 하세요.' }
+					{ user && user.isLogin ? user.info.name + '님이 로그인 하였습니다.' : '로그인 하세요.' }
 				</div>	
 				<div>
 					{
-						user 
+						user && user.isLogin 
 							? <button className="btn btn-danger" onClick={ onLogout }>로그아웃</button>
 							: <button className="btn btn-primary" onClick={ onLogin }>로그인</button>
 					}

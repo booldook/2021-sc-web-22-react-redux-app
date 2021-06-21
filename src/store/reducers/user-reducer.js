@@ -1,11 +1,22 @@
-const initialState = null
+const initialState = {
+	isLogin: false,
+	info: null
+}
 
 const userReducer = (prevState = initialState, action) => {
 	switch(action.type) {
 		case 'USER_LOGIN':
-			return action.payload
+			return {
+				...prevState,
+				isLogin: true,
+				info: action.payload
+			}
 		case 'USER_LOGOUT':
-			return null
+			return {
+				...prevState,
+				isLogin: false,
+				info: null
+			}
 		default: 
 			return prevState
 	}
