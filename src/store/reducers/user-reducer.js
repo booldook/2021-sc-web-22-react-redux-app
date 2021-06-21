@@ -3,13 +3,9 @@ const initialState = null
 const userReducer = (prevState = initialState, action) => {
 	switch(action.type) {
 		case 'USER_LOGIN':
-			return {
-				...prevState, user: action.payload
-			}
+			return action.payload
 		case 'USER_LOGOUT':
-			return {
-				...prevState, user: null
-			}
+			return null
 		default: 
 			return prevState
 	}
