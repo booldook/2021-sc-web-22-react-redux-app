@@ -18,6 +18,7 @@ function App() {
 
 	const onLogout = useCallback((e) => {
 		dispatch(actUserLogout())
+		inputRef.current.value = ''
 	}, [dispatch])
 
 	const onSubmit = useCallback((e) => {
@@ -26,6 +27,8 @@ function App() {
 			uid: isLogin ? info.id : 0,
 			comment: inputRef.current.value
 		}))
+		inputRef.current.value = ''
+		inputRef.current.focus()
 	}, [dispatch, isLogin, info])
 
 	return (
@@ -46,8 +49,8 @@ function App() {
 				</div>
 				<form onSubmit={ onSubmit }>
 					<div className="form-inline my-3">
-						<input ref={ inputRef } className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus />
-						<button className="btn btn-primary ml-1">등록</button>
+						<input ref={ inputRef } className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus disabled={ !isLogin } />
+						<button className="btn btn-primary ml-1" disabled={ !isLogin }>등록</button>
 					</div>
 				</form>
 			</div>
