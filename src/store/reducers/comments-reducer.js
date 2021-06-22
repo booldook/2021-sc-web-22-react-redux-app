@@ -1,14 +1,19 @@
+import produce from 'immer'
+
 const initialState = []
 
-const commentsReducer = (state = initialState, action) => {
+const commentsReducer = produce((draft, action) => {
 	switch(action.type) {
 		case 'COMMENTS_ADD':
-			return [...state, action.payload]
+			draft.push(action.payload)
+			break
 		case 'COMMENTS_REMOVE':
-			return state.filter( v => v.id !== action.payload )
+			const idx = draft.findIndex(v => v.id === action.payload)
+			draft.splice(idx, 1)
+			break
 		default: 
-			return state
+			return draft
 	}
-}
+}, initialState)
 
 export default commentsReducer

@@ -1,3 +1,5 @@
+import produce from 'immer'
+
 const initialState = {
 	isPending: false,
 	isLogin: false,
@@ -5,45 +7,31 @@ const initialState = {
 	err: null,
 }
 
-const userReducer = (state = initialState, action) => {
+const userReducer = produce((draft, action) => {
 	switch(action.type) {
-		/* case 'USER_LOGIN':
-			return {
-				...state,
-				isLogin: true,
-				info: action.payload
-			} */
 		case 'USER_LOGIN_PENDING':
-			return {
-				...state,
-				isPending: true,
-			}
+			draft.isPending = true
+			break
 		case 'USER_LOGIN_FULFILLED':
-			return {
-				...state,
-				isPending: false,
-				isLogin: true,
-				info: action.payload,
-			}
+			draft.isPending = false
+			draft.isLogin = true
+			draft.info = action.payload
+			break
 		case 'USER_LOGIN_REJECTED':
-			return {
-				...state,
-				isPending: false,
-				isLogin: false,
-				info: null,
-				err: action.payload
-			}
+			draft.isPending = false
+			draft.isLogin = false
+			draft.info = null
+			draft.err = action.payload
+			break
 		case 'USER_LOGOUT':
-			return {
-				...state,
-				isPending: false,
-				isLogin: false,
-				info: null,
-				err: null
-			}
+			draft.isPending = false
+			draft.isLogin = false
+			draft.info = null
+			draft.err = null
+			break
 		default: 
-			return state
+			return draft
 	}
-}
+}, initialState)
 
 export default userReducer
