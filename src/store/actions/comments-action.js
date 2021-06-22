@@ -1,8 +1,7 @@
-import store from '../index'
+let num = 1
 
 const actCommentsAdd = (payload) => {
-	const comments = store.getState().comments
-	payload.id = comments.length ? comments[comments.length - 1].id + 1 : 1
+	payload.id = num++
 	return { type: 'COMMENTS_ADD', payload }
 }
 
