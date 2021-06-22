@@ -10,6 +10,7 @@ const List = ({ v }) => {
 	const onRemove = useCallback( e => {
 		e.preventDefault()
 		dispatch(actCommentsRemove(id))
+		// if(window.confirm('정말로 삭제하시겠습니까?')) {}
 	}, [dispatch, id])
 
 	return (
