@@ -1,5 +1,8 @@
 const state = {
-	user: null,
+	user: {
+		isLogin: false,
+		info: null
+	},
 	comments: []
 }
 

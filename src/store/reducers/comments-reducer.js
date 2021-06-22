@@ -1,13 +1,13 @@
 const initialState = []
 
-const commentsReducer = (prevState = initialState, action) => {
+const commentsReducer = (state = initialState, action) => {
 	switch(action.type) {
 		case 'COMMENTS_ADD':
-			return [...prevState, action.payload]
+			return [...state, action.payload]
 		case 'COMMENTS_REMOVE':
-			return prevState.filter( v => v.id !== action.payload )
+			return state.filter( v => v.id !== action.payload )
 		default: 
-			return prevState
+			return state
 	}
 }
 
