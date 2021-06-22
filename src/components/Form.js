@@ -28,7 +28,7 @@ const Form = () => {
 	}, [isLogin])
 
 	return (
-		<form onSubmit={ onSubmit }>
+		<form onSubmit={ onSubmit } >
 			<div className="form-inline my-3">
 				<input ref={ inputRef } className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus disabled={ !isLogin } value={ value } />
 				<button className="btn btn-primary ml-1" disabled={ !isLogin }>등록</button>
