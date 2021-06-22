@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import { useCallback, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { actCommentsAdd } from '../store/actions/comments-action'
 import moment from 'moment'
@@ -23,10 +23,14 @@ const Form = () => {
 		}
 	}, [dispatch, isLogin, info])
 
+	const value = useMemo(() => {
+		if(!isLogin) return ''
+	}, [isLogin])
+
 	return (
 		<form onSubmit={ onSubmit }>
 			<div className="form-inline my-3">
-				<input ref={ inputRef } className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus disabled={ !isLogin } />
+				<input ref={ inputRef } className="form-control w-75" placeholder="코멘트를 남겨주세요." autoFocus disabled={ !isLogin } value={ value } />
 				<button className="btn btn-primary ml-1" disabled={ !isLogin }>등록</button>
 			</div>
 		</form>

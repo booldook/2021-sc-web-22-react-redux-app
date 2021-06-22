@@ -1,10 +1,16 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux'
+import { actCommentsRemove } from '../store/actions/comments-action'
 
 const List = ({ v }) => {
 
+	const dispatch = useDispatch()
+	const id = v.id
+
 	const onRemove = useCallback( e => {
 		e.preventDefault()
-	}, [])
+		dispatch(actCommentsRemove(id))
+	}, [dispatch, id])
 
 	return (
 		<tr>
